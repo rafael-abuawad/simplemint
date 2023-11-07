@@ -1,0 +1,17 @@
+{% for nft in nft_list  %}
+    {{ nft.name }}
+    {{ nft.description }}
+    {{ nft.properties.creator }}
+    {{ nft.is_public }}
+    <ul>
+    {% for trait in nft.properties.traits.all %}
+        <li>
+            <ul>
+                <li>Name: {{ trait.name }}</li>
+                <li>Value: {{ trait.value }}</li>
+                <li>Type: {{ trait.type }}</li>
+            </ul>
+        </li>
+    {% endfor %}
+    </ul>
+{% endfor %}

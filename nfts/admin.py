@@ -1,3 +1,5 @@
 from django.contrib import admin
 
-# Register your models here.
+from nfts.models import NFT, Properties, Trait
+
+admin.site.register([NFT, Properties, Trait])
