@@ -127,6 +127,8 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 AUTH_USER_MODEL = "accounts.User"
 
+LOGIN_URL = "login"
+
 LOGIN_REDIRECT_URL = "nft-list"
 
 LOGOUT_REDIRECT_URL = "nft-list"
@@ -134,3 +136,11 @@ LOGOUT_REDIRECT_URL = "nft-list"
 MEDIA_URL = "/media/"
 
 MEDIA_ROOT = BASE_DIR / "media"
+
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_USE_TLS = False
+EMAIL_PORT = 465
+EMAIL_USE_SSL = True
+EMAIL_HOST_USER = "rafael.abuawad.vivanco@gmail.com"
+EMAIL_HOST_PASSWORD = "qfec jtdl prmk rlsx"
