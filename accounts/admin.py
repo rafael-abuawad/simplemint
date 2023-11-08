@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 
 from accounts.forms import UserCreationForm, UserChangeForm
-from accounts.models import User
+from accounts.models import User, Account
 
 
 class UserAdmin(UserAdmin):
@@ -11,11 +11,13 @@ class UserAdmin(UserAdmin):
     model = User
     list_display = (
         "email",
+        "account",
         "is_staff",
         "is_active",
     )
     list_filter = (
         "email",
+        "account",
         "is_staff",
         "is_active",
     )
@@ -48,3 +50,4 @@ class UserAdmin(UserAdmin):
 
 
 admin.site.register(User, UserAdmin)
+admin.site.register(Account)

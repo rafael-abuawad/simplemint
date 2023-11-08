@@ -27,11 +27,19 @@ class Trait(models.Model):
 
 class NFT(models.Model):
     name = models.CharField(max_length=256)
+    unit = models.CharField(max_length=64)
+    mananger = models.CharField(max_length=64, blank=True, default="")
+    reserve = models.CharField(max_length=64, blank=True, default="")
+    freeze = models.CharField(max_length=64, blank=True, default="")
+    clawback = models.CharField(max_length=64, blank=True, default="")
+    decimals = models.IntegerField(default=0)
+    total = models.IntegerField(default=0)
     description = models.TextField()
     image = models.ImageField(upload_to="nfts/images")
     image_integrity = models.CharField(blank=True, max_length=64, editable=False)
     is_public = models.BooleanField(blank=False, default=False)
     properties = models.OneToOneField(Properties, on_delete=models.CASCADE)
+    index = models.IntegerField(blank=True, default=0)
     owner = models.ForeignKey(User, on_delete=models.CASCADE)
 
     @classmethod

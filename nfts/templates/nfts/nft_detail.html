@@ -1,7 +1,5 @@
-{% for nft in nft_list  %}
-    <a href="{% url 'nft-detail' nft.pk %}">
-        {{ nft.name }}
-    </a>
+<article>
+    {{ nft.name }}
     {{ nft.description }}
     {{ nft.properties.creator }}
     {{ nft.is_public }}
@@ -16,4 +14,4 @@
         </li>
     {% endfor %}
     </ul>
-{% endfor %}
+</article>
