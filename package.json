@@ -1,5 +1,10 @@
 {
+  "scripts": {
+    "format": "npx prettier . -w",
+    "dev": "npx tailwindcss -i ./shared/static/shared/css/input.css -o ./shared/static/shared/css/output.css --watch"
+  },
   "devDependencies": {
-    "prettier": "^3.0.3"
+    "prettier": "^3.0.3",
+    "tailwindcss": "^3.3.5"
   }
 }

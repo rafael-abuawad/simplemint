@@ -1,15 +1,16 @@
 from django.views.generic import FormView
 from django.contrib.auth import views as auth_views
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 
 from accounts.forms import UserCreationForm
 
 
-class PasswordChangeView(auth_views.PasswordChangeView):
+class PasswordChangeView(LoginRequiredMixin, auth_views.PasswordChangeView):
     template_name = "registration/password-change.html"
 
 
-class PasswordChangeDoneView(auth_views.PasswordChangeDoneView):
+class PasswordChangeDoneView(LoginRequiredMixin, auth_views.PasswordChangeDoneView):
     template_name = "registration/password-change-done.html"
 
 

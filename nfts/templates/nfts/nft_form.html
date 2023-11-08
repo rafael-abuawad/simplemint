@@ -1,26 +1,23 @@
 <article>
-    <header>
-        <hgroup>
-            <h1>Mint NFT</h1>
-            <h2></h2>
-        </hgroup>
-    </header>
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ form.as_p }}
+  <header>
+    <hgroup>
+      <h1>Mint NFT</h1>
+      <h2></h2>
+    </hgroup>
+  </header>
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %} {{ form.as_p }}
 
-        <div>
-            <h2>Traits</h2>
-            <div id="trait-form">
-                {{ trait_formset.management_form}}
-                {% for form in trait_formset %}
-                    {{ form.as_p }}
-                {% endfor %}
-            </div>
-        </div>
+    <div>
+      <h2>Traits</h2>
+      <div id="trait-form">
+        {{ trait_formset.management_form}} {% for form in trait_formset %} {{
+        form.as_p }} {% endfor %}
+      </div>
+    </div>
 
-        <div>
-            <button type="submit">Mint</button>
-        </div>
-    </form>
+    <div>
+      <button type="submit">Mint</button>
+    </div>
+  </form>
 </article>

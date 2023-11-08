@@ -1,19 +1,15 @@
-{% for nft in nft_list  %}
-    <a href="{% url 'nft-detail' nft.pk %}">
-        {{ nft.name }}
-    </a>
-    {{ nft.description }}
-    {{ nft.properties.creator }}
-    {{ nft.is_public }}
+{% for nft in nft_list %}
+<a href="{% url 'nft-detail' nft.pk %}"> {{ nft.name }} </a>
+{{ nft.description }} {{ nft.properties.creator }} {{ nft.is_public }}
+<ul>
+  {% for trait in nft.properties.traits.all %}
+  <li>
     <ul>
-    {% for trait in nft.properties.traits.all %}
-        <li>
-            <ul>
-                <li>Name: {{ trait.name }}</li>
-                <li>Value: {{ trait.value }}</li>
-                <li>Type: {{ trait.type }}</li>
-            </ul>
-        </li>
-    {% endfor %}
+      <li>Name: {{ trait.name }}</li>
+      <li>Value: {{ trait.value }}</li>
+      <li>Type: {{ trait.type }}</li>
     </ul>
+  </li>
+  {% endfor %}
+</ul>
 {% endfor %}

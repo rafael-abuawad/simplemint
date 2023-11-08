@@ -46,8 +46,9 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "accounts",
-    "nfts",
+    "shared.apps.SharedConfig",
+    "accounts.apps.AccountsConfig",
+    "nfts.apps.NftsConfig",
 ]
 
 MIDDLEWARE = [
@@ -141,14 +142,22 @@ LOGIN_REDIRECT_URL = "nft-list"
 
 LOGOUT_REDIRECT_URL = "nft-list"
 
+STATIC_URL = "static/"
+
 MEDIA_URL = "/media/"
 
 MEDIA_ROOT = BASE_DIR / "media"
 
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+
 EMAIL_HOST = env("EMAIL_HOST")
+
 EMAIL_USE_TLS = env("EMAIL_USE_TLS", bool)
+
 EMAIL_PORT = env("EMAIL_PORT", int)
+
 EMAIL_USE_SSL = env("EMAIL_USE_SSL", bool)
+
 EMAIL_HOST_USER = env("EMAIL_HOST_USER")
+
 EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")

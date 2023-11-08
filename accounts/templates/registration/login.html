@@ -1,9 +1,75 @@
-<h2>Log In</h2>
-<form method="post">
-  {% csrf_token %}
-  {{ form.as_p }}
-  <button type="submit">Log In</button>
-</form>
-
-<small>Don't have an account? <a href="{% url 'register' %}">Registrar</a></small>
-<small>Forgot your password? <a href="{% url 'password_reset' %}">Reset</a></small>
+{% extends "base.html" %} {% load tags %} {% block content %}
+<div class="mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
+  <main
+    class="container relative h-screen flex-col items-center justify-center grid lg:max-w-none lg:px-0 mx-auto"
+  >
+    <div
+      class="absolute right-4 top-4 md:right-8 md:top-8 flex space-x-3 items-center"
+    >
+      <a href="{% url 'register' %}">Register</a>
+    </div>
+    <div class="absolute left-4 top-4 md:left-8 md:top-8 font-bold">
+      🍃 Simplemint
+    </div>
+    <div class="lg:p-8">
+      <div
+        class="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]"
+      >
+        <div class="flex flex-col space-y-2 text-center">
+          <h1 class="text-2xl font-semibold tracking-tight">
+            Login into your account
+          </h1>
+          <p class="text-sm text-muted-foreground">
+            Enter your email below to access your account
+          </p>
+        </div>
+        <div class="grid gap-6">
+          <form method="post">
+            {% csrf_token %}
+            <div class="grid gap-2">
+              <div class="grid gap-1">
+                {% for field in form %}
+                <div>
+                  <div
+                    class="flex content-center items-center justify-between text-sm"
+                  >
+                    <label
+                      for="{{ field.id_for_label  }}"
+                      class="block font-medium text-gray-700 dark:text-gray-200"
+                    >
+                      {{ field.label }}
+                    </label>
+                  </div>
+                  <div class="mt-1 relative">
+                    <div class="relative">{{ field|add_class:"input" }}</div>
+                    {% for error in field.errors %}
+                    <small class="mt-2 text-red-500 dark:text-red-400 text-sm"
+                      >{{ error|escape }}</small
+                    >
+                    {% endfor %}
+                  </div>
+                </div>
+                {% endfor %}
+              </div>
+            </div>
+            <button
+              type="submit"
+              class="w-full mt-2 focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 flex-shrink-0 font-medium rounded-md text-sm gap-x-1.5 px-2.5 py-1.5 shadow-sm text-white dark:text-gray-900 bg-amber-500 hover:bg-amber-600 disabled:bg-amber-500 dark:bg-amber-400 dark:hover:bg-amber-500 dark:disabled:bg-amber-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-500 dark:focus-visible:outline-amber-400 inline-flex items-center justify-center"
+            >
+              Login with Email
+            </button>
+          </form>
+        </div>
+        <p class="px-8 text-center text-sm text-muted-foreground">
+          Forgot your password?
+          <a
+            href="{% url 'password_reset' %}"
+            class="underline underline-offset-4 hover:text-primary"
+            >Reset your password</a
+          >.
+        </p>
+      </div>
+    </div>
+  </main>
+</div>
+{% endblock content %}
