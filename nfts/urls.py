@@ -5,7 +5,6 @@ from nfts.views import (
     NFTListView,
     UserNFTListView,
     NFTDetailView,
-    nft_claim,
 )
 
 urlpatterns = [
@@ -13,5 +12,4 @@ urlpatterns = [
     path("nfts/", UserNFTListView.as_view(), name="user-nft-list"),
     path("nfts/mint/", NFTFormView.as_view(), name="nft-mint"),
     path("nfts/<int:pk>/", NFTDetailView.as_view(), name="nft-detail"),
-    path("nfts/<int:pk>/claim/", nft_claim, name="nft-claim"),
 ]

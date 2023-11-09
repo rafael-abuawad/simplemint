@@ -1,5 +1,6 @@
-from django.db import models
 import hashlib
+import uuid
+from django.db import models
 
 from accounts.models import User
 
@@ -20,6 +21,8 @@ class NFT(models.Model):
     total = models.IntegerField(default=0)
     description = models.TextField()
     index = models.IntegerField(blank=True, default=0)
+    is_claimable = models.BooleanField(default=False)
+    claim_token = models.UUIDField(default="")
 
     # management
     manager = models.CharField(max_length=64, blank=True, null=True, default="")
@@ -35,6 +38,14 @@ class NFT(models.Model):
     properties = models.OneToOneField(Properties, on_delete=models.CASCADE)
     creator = models.ForeignKey(User, on_delete=models.CASCADE)
 
+    def generate_claim_token(self):
+        self.is_claimable = True
+        self.claim_token = uuid.uuid4()
+    
+    def claim_token(self):
+        self.is_claimable = True
+        self.claim_token = "" 
+    
     @classmethod
     def calculate_hash(cls, image):
         sha256 = hashlib.sha256()

@@ -22,7 +22,9 @@
     </div>
 
     <form class="space-y-8 py-2" method="post" enctype="multipart/form-data">
-      {% csrf_token %} {% for error in form.non_field_errors %}
+      {% csrf_token %}
+
+      {% for error in form.non_field_errors %}
       <small class="mt-2 text-red-500 dark:text-red-400 text-sm">
         {{ error|escape }}
       </small>
@@ -43,8 +45,11 @@
             </div>
             <div class="mt-1 relative">
               <div class="relative">
-                {% if field.errors %} {{ field|add_class:"input is-error" }} {%
-                else %} {{ field|add_class:"input" }} {% endif %}
+                {% if field.errors %}
+                {{ field|add_class:"input is-error" }}
+                {% else %}
+                {{ field|add_class:"input" }}
+                {% endif %}
               </div>
               {% if field.help_text %}
               <small class="mt-2 text-gray-500 dark:text-gray-400 text-sm">

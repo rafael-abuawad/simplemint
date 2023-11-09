@@ -69,7 +69,7 @@ def asset_config(acct: Account):
     print(f"Result confirmed in round: {results['confirmed-round']}")
 
 
-def asset_info(acct: Account, created_asset: int) -> Any:
+def asset_info(created_asset: int) -> Any:
     # Retrieve the asset info of the newly created asset
     asset_info = algod_client.asset_info(created_asset)
     asset_params: Dict[str, Any] = asset_info["params"]

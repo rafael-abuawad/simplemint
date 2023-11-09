@@ -116,7 +116,9 @@
               </p>
             </div>
           </div>
-          {% endif %} {% if nft.manager %}
+          {% endif %}
+          
+          {% if nft.reserve %}
           <div
             class="rounded-xl border border-gray-200 dark:border-gray-800 bg-card text-card-foreground shadow"
           >
@@ -132,7 +134,9 @@
               </p>
             </div>
           </div>
-          {% endif %} {% if nft.manager %}
+          {% endif %}
+          
+          {% if nft.manager %}
           <div
             class="rounded-xl border border-gray-200 dark:border-gray-800 bg-card text-card-foreground shadow"
           >
@@ -148,7 +152,9 @@
               </p>
             </div>
           </div>
-          {% endif %} {% if nft.manager %}
+          {% endif %}
+          
+          {% if nft.manager %}
           <div
             class="rounded-xl border border-gray-200 dark:border-gray-800 bg-card text-card-foreground shadow"
           >
@@ -168,39 +174,16 @@
         </div>
       </div>
 
-      {% comment %}
+      {% if user.is_authenticated and user. %}
       <div>
-        <h2 class="text-lg font-bold mb-2">Traits</h2>
+        <h2 class="text-lg font-bold mb-2">Transfer</h2>
         <div class="grid gap-4 grid-cols-1 md:grid-cols-2">
           <pre class="md:col-span-2">
             <code class="language-json">{{ nft.properties.traits }}</code>
           </pre>
         </div>
       </div>
-      {% endcomment %} {% if user.is_authenticated and user.pk == nft.creator.pk
-      %}
-      <div>
-        <h2 class="text-lg font-bold mb-2">Actions</h2>
-        <div class="grid gap-4 grid-cols-1 md:grid-cols-2">
-          <div>
-            <a
-              href="#"
-              class="w-full mt-2 cursor-pointer focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 flex-shrink-0 font-medium rounded-md text-sm gap-x-1.5 px-2.5 py-1.5 shadow-sm text-white dark:text-gray-900 bg-amber-500 hover:bg-amber-600 disabled:bg-amber-500 dark:bg-amber-400 dark:hover:bg-amber-500 dark:disabled:bg-amber-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-500 dark:focus-visible:outline-amber-400 inline-flex items-center justify-center"
-            >
-              Generate Claim Link
-            </a>
-          </div>
-          <div>
-            <a
-              href="#"
-              class="w-full mt-2 cursor-pointer focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 flex-shrink-0 font-medium rounded-md text-sm gap-x-1.5 px-2.5 py-1.5 shadow-sm text-white dark:text-gray-900 bg-amber-500 hover:bg-amber-600 disabled:bg-amber-500 dark:bg-amber-400 dark:hover:bg-amber-500 dark:disabled:bg-amber-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-500 dark:focus-visible:outline-amber-400 inline-flex items-center justify-center"
-            >
-              Update metadata
-            </a>
-          </div>
-        </div>
-      </div>
-      {% endif %}
+      {% endcomment %}
     </section>
   </div>
 </main>

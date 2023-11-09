@@ -1,14 +1,14 @@
 from typing import Any, Dict
 from django.http import HttpRequest
 from django.urls import reverse_lazy
-from django.views.generic import ListView, DetailView, FormView
+from django.views.generic import ListView, DetailView, FormView, RedirectView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 
 from nfts.forms import NFTForm
 from nfts.models import NFT, Properties
-from nfts.asa import asset_create, asset_optin, asset_transfer
+from nfts.asa import asset_create, asset_optin, asset_transfer, asset_info
 
 
 class NFTListView(ListView):
@@ -24,7 +24,6 @@ class UserNFTListView(LoginRequiredMixin, ListView):
 
 class NFTDetailView(DetailView):
     model = NFT
-
 
 class NFTFormView(LoginRequiredMixin, FormView):
     form_class = NFTForm
@@ -68,16 +67,3 @@ class NFTFormView(LoginRequiredMixin, FormView):
             nft.save()
 
         return super(NFTFormView, self).form_valid(form)
-
-
-@login_required
-def nft_claim(request: HttpRequest, pk: int):
-    nft = NFT.objects.get(pk=pk)
-    if request.method == "POST":
-        asset_optin(request.user.account, nft.index)
-        asset_transfer(nft.owner.account, request.user.account, nft.index)
-        return redirect(reverse_lazy("nft-list"))
-
-    context = {}
-    context["nft"] = nft
-    return render(request=request, template_name="nfts/nft_claim.html", context=context)
