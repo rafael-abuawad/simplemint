@@ -7,6 +7,10 @@
     <div class="grid gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
       {% for nft in nft_list %}
         {% include "nfts/_partials/nft_card.html" %}
+      {% empty %}
+      <div class="col-span-1 md:col-span-2 lg:col-span-3">
+        <p class="text-center w-full">There are no NFTs... yet!</p>
+      </div>
       {% endfor %}
     </div>
   </div>

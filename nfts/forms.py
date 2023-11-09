@@ -1,7 +1,5 @@
 from django import forms
 
-from nfts.models import Trait
-
 
 class NFTForm(forms.Form):
     name = forms.CharField(help_text="The name of the NFT")
@@ -10,7 +8,10 @@ class NFTForm(forms.Form):
     decimals = forms.IntegerField()
     description = forms.CharField(widget=forms.Textarea)
     image = forms.ImageField()
-    creator = forms.CharField(required=False)
+    traits = forms.JSONField(
+        required=False,
+        help_text="You need to input valid JSON to make it work.",
+    )
     mananger = forms.CharField(
         max_length=64,
         min_length=64,
@@ -35,8 +36,3 @@ class NFTForm(forms.Form):
         required=False,
         help_text="You can set the `clawback` field empty if you dont want the `clawback` functionality enabled.",
     )
-
-
-TraitFormset = forms.modelformset_factory(
-    Trait, fields=("name", "value", "type"), extra=5
-)

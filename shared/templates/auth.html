@@ -7,8 +7,10 @@
     <title>{{ title }} - Simplemint</title>
     {% else %}
     <title>Simplemint</title>
-    {% endif %} {% load static %}
+    {% endif %}
+    {% load static %}
     <link rel="stylesheet" href="{% static 'shared/css/output.css' %}" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"/>
   </head>
   <body>
     {% block content %}{% endblock content %}

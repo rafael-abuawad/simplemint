@@ -1,11 +1,17 @@
 <a href="{% url 'nft-detail' nft.pk %}">
-    <div class="flex border border-gray-200 dark:border-gray-700 relative rounded-md flex flex-col not-prose bg-white dark:bg-gray-900">
-        <div>
-            <img class="w-full h-48 object-cover" src="{{ nft.image.url }}" alt="{{ nft.name}}">
-        </div>
-        <div class="px-4 py-5 sm:p-6">
-            <h2 class="font-bold">{{ nft.name }}</h2>
-            <p class="text-sm">{{ nft.unit }}</p>
-        </div>
+  <div
+    class="flex border border-gray-200 dark:border-gray-700 relative rounded-md flex flex-col not-prose bg-white dark:bg-gray-900"
+  >
+    <div>
+      <img
+        class="w-full h-48 object-cover"
+        src="{{ nft.image.url }}"
+        alt="{{ nft.name}}"
+      />
     </div>
+    <div class="px-4 py-5 sm:p-6">
+      <h2 class="font-bold">{{ nft.name }}</h2>
+      <p class="text-sm">{{ nft.unit }}</p>
+    </div>
+  </div>
 </a>

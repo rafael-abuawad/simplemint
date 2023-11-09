@@ -1,11 +1,14 @@
 from typing import Any, Dict
+from django.http import HttpRequest
 from django.urls import reverse_lazy
-from django.views.generic import ListView, DetailView, FormView, TemplateView
+from django.views.generic import ListView, DetailView, FormView
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render, redirect
 
-from nfts.forms import NFTForm, TraitFormset
-from nfts.models import NFT, Properties, Trait
-from nfts.asa import asset_create
+from nfts.forms import NFTForm
+from nfts.models import NFT, Properties
+from nfts.asa import asset_create, asset_optin, asset_transfer
 
 
 class NFTListView(ListView):
@@ -16,7 +19,7 @@ class UserNFTListView(LoginRequiredMixin, ListView):
     model = NFT
 
     def get_queryset(self):
-        return NFT.objects.filter(owner=self.request.user)
+        return NFT.objects.filter(creator=self.request.user)
 
 
 class NFTDetailView(DetailView):
@@ -37,56 +40,44 @@ class NFTFormView(LoginRequiredMixin, FormView):
         return initial
 
     def form_valid(self, form):
-        trait_formset = TraitFormset(self.request.POST)
-
-        if form.is_valid() and trait_formset.is_valid():
+        if form.is_valid():
             creator = form.cleaned_data.get("creator")
-            properties = Properties.objects.create(creator=creator)
+            traits = (form.cleaned_data.get("traits"),)
+            properties = Properties.objects.create(creator=creator, traits=traits)
             properties.save()
-
-            for t in trait_formset.cleaned_data:
-                if len(t) != 0:
-                    trait = Trait.objects.create(
-                        name=t.get("name"),
-                        type=t.get("type"),
-                        value=t.get("value"),
-                        properties=properties,
-                    )
-                    trait.save()
 
             nft = NFT.objects.create(
                 name=form.cleaned_data.get("name"),
                 unit=form.cleaned_data.get("unit"),
-                mananger=form.cleaned_data("manager"),
-                reserve=form.cleaned_data("reserve"),
-                freeze=form.cleaned_data("freeze"),
-                clawback=form.cleaned_data("clawback"),
+                manager=form.cleaned_data.get("manager"),
+                reserve=form.cleaned_data.get("reserve"),
+                freeze=form.cleaned_data.get("freeze"),
+                clawback=form.cleaned_data.get("clawback"),
                 description=form.cleaned_data.get("description"),
                 image=form.cleaned_data.get("image"),
-                index=asset_create(self.request.user.account),
                 properties=properties,
                 owner=self.request.user,
             )
+
+            url = f"/_/api/v1/nfts/{nft.pk}"
+            i = asset_create(nft, url)
+
             img = form.cleaned_data.get("image")
             nft.image_integrity = NFT.calculate_hash(img)
+            nft.index = i
             nft.save()
 
-        return super().form_valid(form)
-
-    def get_context_data(self, **kwargs) -> Dict[str, Any]:
-        context = super().get_context_data(**kwargs)
-        context["trait_formset"] = TraitFormset()
-        return context
+        return super(NFTFormView, self).form_valid(form)
 
 
-class NFTClaim(LoginRequiredMixin, TemplateView):
-    template_name = "nfts/nft_claim.html"
+@login_required
+def nft_claim(request: HttpRequest, pk: int):
+    nft = NFT.objects.get(pk=pk)
+    if request.method == "POST":
+        asset_optin(request.user.account, nft.index)
+        asset_transfer(nft.owner.account, request.user.account, nft.index)
+        return redirect(reverse_lazy("nft-list"))
 
-    def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
-        context = super().get_context_data(**kwargs)
-        context["nft"] = NFT.objects.get(pk=1)
-        return context
-
-    def post(self, request, *args, **kwargs):
-        context = self.get_context_data(**kwargs)
-        return self.render_to_response(context)
+    context = {}
+    context["nft"] = nft
+    return render(request=request, template_name="nfts/nft_claim.html", context=context)

@@ -3,6 +3,7 @@ from algosdk import transaction
 
 from accounts.utils import get_algod_client
 from accounts.models import Account
+from nfts.models import NFT
 
 # Setup
 algod_client = get_algod_client()
@@ -11,36 +12,26 @@ algod_client = get_algod_client()
 # example: asset_create
 # Account 1 creates an asset called `rug` with a total supply
 # of 1000 units and sets itself to the freeze/clawback/manager/reserve roles
-def asset_create(
-    acct: Account,
-    manager: str,
-    name: str,
-    unit: str,
-    reserve: str,
-    freeze: str,
-    clawback: str,
-    url: str,
-    total: int,
-    decimals: int,
-) -> int:
+def asset_create(nft: NFT, url: str) -> int:
     sp = algod_client.suggested_params()
     txn = transaction.AssetConfigTxn(
-        sender=acct.address,
+        sender=nft.owner.account.address,
         sp=sp,
         default_frozen=False,
-        unit_name=unit,
-        asset_name=name,
-        manager=manager,
-        reserve=reserve,
-        freeze=freeze,
-        clawback=clawback,
+        unit_name=nft.unit,
+        asset_name=nft.name,
+        manager=nft.manager,
+        reserve=nft.reserve,
+        freeze=nft.freeze,
+        clawback=nft.clawback,
         url=url,
-        total=total,
-        decimals=decimals,
+        total=nft.total,
+        decimals=nft.decimals,
+        strict_empty_address_check=False,
     )
 
     # Sign with secret key of creator
-    stxn = txn.sign(acct.private_key)
+    stxn = txn.sign(nft.owner.account.private_key)
 
     # Send the transaction to the network and retrieve the txid.
     txid = algod_client.send_transaction(stxn)

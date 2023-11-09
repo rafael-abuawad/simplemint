@@ -45,19 +45,27 @@
                   </div>
                   <div class="mt-1 relative">
                     <div class="relative">
-                      {% if field.errors %} {{ field|add_class:"input is-error"
-                      }} {% else %} {{ field|add_class:"input" }} {% endif %}
+                      {% if field.errors %}
+                        {{ field|add_class:"input is-error"}}
+                      {% else %}
+                        {{ field|add_class:"input" }}
+                      {% endif %}
                     </div>
                     {% for error in field.errors %}
-                      <small class="mt-2 text-red-500 dark:text-red-400 text-sm">
-                        {{ error|escape }}
-                      </small>
+                    <small class="mt-2 text-red-500 dark:text-red-400 text-sm">
+                      {{ error|escape }}
+                    </small>
                     {% endfor %}
                   </div>
                 </div>
                 {% endfor %}
               </div>
             </div>
+            {% for error in form.non_field_errors %}
+            <small class="mt-2 text-red-500 dark:text-red-400 text-sm">
+              {{ error|escape }}
+            </small>
+            {% endfor %}
             <button
               type="submit"
               class="w-full mt-2 focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 flex-shrink-0 font-medium rounded-md text-sm gap-x-1.5 px-2.5 py-1.5 shadow-sm text-white dark:text-gray-900 bg-amber-500 hover:bg-amber-600 disabled:bg-amber-500 dark:bg-amber-400 dark:hover:bg-amber-500 dark:disabled:bg-amber-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-500 dark:focus-visible:outline-amber-400 inline-flex items-center justify-center"

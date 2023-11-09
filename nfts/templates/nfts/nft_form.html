@@ -7,41 +7,50 @@
     <!-- header -->
     <hgroup>
       <h3 class="text-lg font-medium">Mint NFT</h3>
-      <p class="text-sm text-muted-foreground">Here is where you can create your own custom NFT</p>
+      <p class="text-sm text-muted-foreground">
+        Here is where you can create your own custom NFT
+      </p>
     </hgroup>
 
     <!-- divider -->
     <div class="py-2">
       <div class="flex items-center align-center text-center w-full flex-row">
-        <div class="flex border-gray-200 dark:border-gray-800 w-full border-t border-solid"></div>
+        <div
+          class="flex border-gray-200 dark:border-gray-800 w-full border-t border-solid"
+        ></div>
       </div>
     </div>
 
-    <form class="space-y-8 py-2">
-      {% csrf_token %}
+    <form class="space-y-8 py-2" method="post" enctype="multipart/form-data">
+      {% csrf_token %} {% for error in form.non_field_errors %}
+      <small class="mt-2 text-red-500 dark:text-red-400 text-sm">
+        {{ error|escape }}
+      </small>
+      {% endfor %}
       <div class="grid gap-2">
         <div class="grid gap-3">
           {% for field in form %}
           <div>
-            <div class="flex content-center items-center justify-between text-sm">
-              <label for="{{ field.id_for_label  }}" class="block font-medium text-gray-700 dark:text-gray-200">
+            <div
+              class="flex content-center items-center justify-between text-sm"
+            >
+              <label
+                for="{{ field.id_for_label  }}"
+                class="block font-medium text-gray-700 dark:text-gray-200"
+              >
                 {{ field.label }}
               </label>
             </div>
             <div class="mt-1 relative">
               <div class="relative">
-                {% if field.errors %}
-                  {{ field|add_class:"input is-error" }}
-                {% else %}
-                  {{ field|add_class:"input" }}
-                {% endif %}
+                {% if field.errors %} {{ field|add_class:"input is-error" }} {%
+                else %} {{ field|add_class:"input" }} {% endif %}
               </div>
               {% if field.help_text %}
               <small class="mt-2 text-gray-500 dark:text-gray-400 text-sm">
                 {{ field.help_text }}
               </small>
-              {% endif %}
-              {% for error in field.errors %}
+              {% endif %} {% for error in field.errors %}
               <small class="mt-2 text-red-500 dark:text-red-400 text-sm">
                 {{ error|escape }}
               </small>
@@ -52,19 +61,26 @@
         </div>
       </div>
       <div class="space-x-2">
-        <button type="submit"
-          class="focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 flex-shrink-0 font-medium rounded-md text-sm gap-x-2.5 px-3.5 py-2.5 shadow-sm text-white dark:text-gray-900 bg-amber-500 hover:bg-amber-600 disabled:bg-amber-500 dark:bg-amber-400 dark:hover:bg-amber-500 dark:disabled:bg-amber-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-500 dark:focus-visible:outline-amber-400 inline-flex items-center">
+        <button
+          type="submit"
+          class="focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 flex-shrink-0 font-medium rounded-md text-sm gap-x-2.5 px-3.5 py-2.5 shadow-sm text-white dark:text-gray-900 bg-amber-500 hover:bg-amber-600 disabled:bg-amber-500 dark:bg-amber-400 dark:hover:bg-amber-500 dark:disabled:bg-amber-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-500 dark:focus-visible:outline-amber-400 inline-flex items-center"
+        >
           Create
         </button>
-        <button type="button"
-          class="focus:outline-none focus-visible:outline-0 disabled:cursor-not-allowed disabled:opacity-75 flex-shrink-0 font-medium rounded-md text-sm gap-x-2.5 px-3.5 py-2.5 shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-gray-700 text-gray-700 dark:text-gray-200 bg-gray-50 hover:bg-gray-100 disabled:bg-gray-50 dark:bg-gray-800 dark:hover:bg-gray-700/50 dark:disabled:bg-gray-800 focus-visible:ring-2 focus-visible:ring-amber-500 dark:focus-visible:ring-amber-400 inline-flex items-center">
+        <a
+          role="button"
+          href="{% url 'nft-list' %}"
+          class="focus:outline-none focus-visible:outline-0 disabled:cursor-not-allowed disabled:opacity-75 flex-shrink-0 font-medium rounded-md text-sm gap-x-2.5 px-3.5 py-2.5 shadow-sm ring-1 ring-inset ring-gray-300 dark:ring-gray-700 text-gray-700 dark:text-gray-200 bg-gray-50 hover:bg-gray-100 disabled:bg-gray-50 dark:bg-gray-800 dark:hover:bg-gray-700/50 dark:disabled:bg-gray-800 focus-visible:ring-2 focus-visible:ring-amber-500 dark:focus-visible:ring-amber-400 inline-flex items-center"
+        >
           Cancel
-        </button>
+        </a>
       </div>
     </form>
   </div>
 
-  <div class="fixed flex flex-col justify-end z-[55] bottom-0 end-0 w-full sm:w-96" role="region">
-  </div>
+  <div
+    class="fixed flex flex-col justify-end z-[55] bottom-0 end-0 w-full sm:w-96"
+    role="region"
+  ></div>
 </main>
 {% endblock content %}

@@ -2,157 +2,205 @@
 {% load tags %}
 
 {% block content %}
-<main class="mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl" >
+<main class="mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
   <div class="grid grid-cols-1 gap-6 lg:grid-cols-2">
     <section>
       <div>
-        <img class="w-full h-96 object-cover rounded-md" src="{{ nft.image.url }}" alt="{{ nft.name}}">
+        <img
+          class="w-full h-96 object-cover rounded-md"
+          src="{{ nft.image.url }}"
+          alt="{{ nft.name}}"
+        />
       </div>
       <div>
-        <p>{{ nft.description }}</p>
+        <p class="text-gray-300 mt-4">{{ nft.description }}</p>
       </div>
     </section>
     <section class="space-y-6">
       <div>
         <h2 class="text-lg font-bold mb-2">NFT</h2>
         <div class="grid gap-4 grid-cols-1 md:grid-cols-2">
-          <div class="rounded-xl border border-gray-200 dark:border-gray-800 bg-card text-card-foreground shadow">
-            <div class="p-6 flex flex-row items-center justify-between space-y-0 pb-2">
+          <div
+            class="rounded-xl border border-gray-200 dark:border-gray-800 bg-card text-card-foreground shadow"
+          >
+            <div
+              class="p-6 flex flex-row items-center justify-between space-y-0 pb-2"
+            >
               <h3 class="tracking-tight text-sm font-medium">Name</h3>
             </div>
             <div class="p-6 pt-0">
-              <div class="text-2xl font-bold"> {{ nft.name }} </div>
-            </div>
-          </div>
-    
-          <div class="rounded-xl border border-gray-200 dark:border-gray-800 bg-card text-card-foreground shadow">
-            <div class="p-6 flex flex-row items-center justify-between space-y-0 pb-2">
-              <h3 class="tracking-tight text-sm font-medium">Unit</h3>
-            </div>
-            <div class="p-6 pt-0">
-              <div class="text-2xl font-bold"> {{ nft.unit|lower }} </div>
-            </div>
-          </div>
-    
-          <div class="rounded-xl border border-gray-200 dark:border-gray-800 bg-card text-card-foreground shadow">
-            <div class="p-6 flex flex-row items-center justify-between space-y-0 pb-2">
-              <h3 class="tracking-tight text-sm font-medium">Decimals</h3>
-            </div>
-            <div class="p-6 pt-0">
-              <div class="text-2xl font-bold"> {{ nft.decimals }} </div>
-            </div>
-          </div>
-    
-          <div class="rounded-xl border border-gray-200 dark:border-gray-800 bg-card text-card-foreground shadow">
-            <div class="p-6 flex flex-row items-center justify-between space-y-0 pb-2">
-              <h3 class="tracking-tight text-sm font-medium">Total</h3>
-            </div>
-            <div class="p-6 pt-0">
-              <div class="text-2xl font-bold"> {{ nft.total }} </div>
-            </div>
-          </div>
-    
-          {% if nft.creator %}
-            <div class="rounded-xl border border-gray-200 dark:border-gray-800 bg-card text-card-foreground shadow">
-              <div class="p-6 flex flex-row items-center justify-between space-y-0 pb-2">
-                <h3 class="tracking-tight text-sm font-medium">Creator</h3>
-              </div>
-              <div class="p-6 pt-0">
-                <div class="text-2xl font-bold"> {{ nft.creator }} </div>
-              </div>
-            </div>
-          {% endif %}
-    
-          {% if nft.manager %}
-          <div class="rounded-xl border border-gray-200 dark:border-gray-800 bg-card text-card-foreground shadow">
-            <div class="p-6 flex flex-row items-center justify-between space-y-0 pb-2">
-              <h3 class="tracking-tight text-sm font-medium">Manager</h3>
-            </div>
-            <div class="p-6 pt-0">
-                <div class="text-2xl font-bold">Enabled</div>
-                <p class="text-xs text-gray-500">{{ nft.manager }} </p>
-            </div>
-          </div>
-          {% endif %}
-    
-          {% if nft.manager %}
-          <div class="rounded-xl border border-gray-200 dark:border-gray-800 bg-card text-card-foreground shadow">
-            <div class="p-6 flex flex-row items-center justify-between space-y-0 pb-2">
-              <h3 class="tracking-tight text-sm font-medium">Reserve</h3>
-            </div>
-            <div class="p-6 pt-0">
-                <div class="text-2xl font-bold">Enabled</div>
-                <p class="text-xs text-gray-500">{{ nft.reserve }} </p>
-            </div>
-          </div>
-          {% endif %}
-    
-          {% if nft.manager %}
-          <div class="rounded-xl border border-gray-200 dark:border-gray-800 bg-card text-card-foreground shadow">
-            <div class="p-6 flex flex-row items-center justify-between space-y-0 pb-2">
-              <h3 class="tracking-tight text-sm font-medium">Freeze</h3>
-            </div>
-            <div class="p-6 pt-0">
-                <div class="text-2xl font-bold">Enabled</div>
-                <p class="text-xs text-gray-500">{{ nft.freeze }} </p>
-            </div>
-          </div>
-          {% endif %}
-    
-          {% if nft.manager %}
-          <div class="rounded-xl border border-gray-200 dark:border-gray-800 bg-card text-card-foreground shadow">
-            <div class="p-6 flex flex-row items-center justify-between space-y-0 pb-2">
-              <h3 class="tracking-tight text-sm font-medium">Clawback</h3>
-            </div>
-            <div class="p-6 pt-0">
-                <div class="text-2xl font-bold">Enabled</div>
-                <p class="text-xs text-gray-500">{{ nft.clawback }} </p>
-            </div>
-          </div>
-          {% endif %}
-    
-    
-        </div>
-      </div>
-      <div>
-        <h2 class="text-lg font-bold mb-2">Traits</h2>
-        <div class="grid gap-4 grid-cols-1 md:grid-cols-2">
-          {% for trait in nft.properties.traits.all %}
-          <div class="rounded-xl border border-gray-200 dark:border-gray-800 bg-card text-card-foreground shadow">
-            <div class="p-6 flex flex-row items-center justify-between space-y-0 pb-2">
-              <h3 class="tracking-tight text-sm font-medium">{{ trait.name }}</h3>
-            </div>
-            <div class="p-6 pt-0">
-              <div class="text-2xl font-bold"> {{ trait.value }} </div>
-            </div>
-          </div>
-          {% endfor %}
-        </div>
-      </div>
-      <div>
-        <h2 class="text-lg font-bold mb-2">Owner</h2>
-        <div class="grid gap-4 grid-cols-1">
-          <div class="rounded-xl border border-gray-200 dark:border-gray-800 bg-card text-card-foreground shadow">
-            <div class="p-6 flex flex-row items-center justify-between space-y-0 pb-2">
-              <h3 class="tracking-tight text-sm font-medium">Owner</h3>
-            </div>
-            <div class="p-6 pt-0">
-              <div class="text-2xl font-bold"> {{ nft.owner }} </div>
+              <div class="text-2xl font-bold">{{ nft.name }}</div>
             </div>
           </div>
 
-          {% if nft.creator %}
-            <div class="rounded-xl border border-gray-200 dark:border-gray-800 bg-card text-card-foreground shadow">
-              <div class="p-6 flex flex-row items-center justify-between space-y-0 pb-2">
-                <h3 class="tracking-tight text-sm font-medium">Creator</h3>
-              </div>
-              <div class="p-6 pt-0">
-                <div class="text-2xl font-bold"> {{ nft.creator }} </div>
+          <div
+            class="rounded-xl border border-gray-200 dark:border-gray-800 bg-card text-card-foreground shadow"
+          >
+            <div
+              class="p-6 flex flex-row items-center justify-between space-y-0 pb-2"
+            >
+              <h3 class="tracking-tight text-sm font-medium">Unit</h3>
+            </div>
+            <div class="p-6 pt-0">
+              <div class="text-2xl font-bold">{{ nft.unit|lower }}</div>
+            </div>
+          </div>
+
+          <div
+            class="rounded-xl border border-gray-200 dark:border-gray-800 bg-card text-card-foreground shadow"
+          >
+            <div
+              class="p-6 flex flex-row items-center justify-between space-y-0 pb-2"
+            >
+              <h3 class="tracking-tight text-sm font-medium">Decimals</h3>
+            </div>
+            <div class="p-6 pt-0">
+              <div class="text-2xl font-bold">{{ nft.decimals }}</div>
+            </div>
+          </div>
+
+          <div
+            class="rounded-xl border border-gray-200 dark:border-gray-800 bg-card text-card-foreground shadow"
+          >
+            <div
+              class="p-6 flex flex-row items-center justify-between space-y-0 pb-2"
+            >
+              <h3 class="tracking-tight text-sm font-medium">Total</h3>
+            </div>
+            <div class="p-6 pt-0">
+              <div class="text-2xl font-bold">{{ nft.total }}</div>
+            </div>
+          </div>
+
+          <div
+            class="rounded-xl border border-gray-200 dark:border-gray-800 bg-card text-card-foreground shadow"
+          >
+            <div
+              class="p-6 flex flex-row items-center justify-between space-y-0 pb-2"
+            >
+              <h3 class="tracking-tight text-sm font-medium">ID</h3>
+            </div>
+            <div class="p-6 pt-0">
+              <div class="text-2xl font-bold">{{ nft.index }}</div>
+            </div>
+          </div>
+
+          <div
+            class="rounded-xl border border-gray-200 dark:border-gray-800 bg-card text-card-foreground shadow"
+          >
+            <div
+              class="p-6 flex flex-row items-center justify-between space-y-0 pb-2"
+            >
+              <h3 class="tracking-tight text-sm font-medium">Creator</h3>
+            </div>
+            <div class="p-6 pt-0">
+              <div class="text-2xl font-bold">
+                {{ nft.creator.account.address|truncatechars:9 }}
               </div>
             </div>
+          </div>
+
+          {% if nft.manager %}
+          <div
+            class="rounded-xl border border-gray-200 dark:border-gray-800 bg-card text-card-foreground shadow"
+          >
+            <div
+              class="p-6 flex flex-row items-center justify-between space-y-0 pb-2"
+            >
+              <h3 class="tracking-tight text-sm font-medium">Manager</h3>
+            </div>
+            <div class="p-6 pt-0">
+              <div class="text-2xl font-bold">Enabled</div>
+              <p class="text-xs text-gray-500">
+                {{ nft.manager|truncatechars:9 }}
+              </p>
+            </div>
+          </div>
+          {% endif %} {% if nft.manager %}
+          <div
+            class="rounded-xl border border-gray-200 dark:border-gray-800 bg-card text-card-foreground shadow"
+          >
+            <div
+              class="p-6 flex flex-row items-center justify-between space-y-0 pb-2"
+            >
+              <h3 class="tracking-tight text-sm font-medium">Reserve</h3>
+            </div>
+            <div class="p-6 pt-0">
+              <div class="text-2xl font-bold">Enabled</div>
+              <p class="text-xs text-gray-500">
+                {{ nft.reserve|truncatechars:9 }}
+              </p>
+            </div>
+          </div>
+          {% endif %} {% if nft.manager %}
+          <div
+            class="rounded-xl border border-gray-200 dark:border-gray-800 bg-card text-card-foreground shadow"
+          >
+            <div
+              class="p-6 flex flex-row items-center justify-between space-y-0 pb-2"
+            >
+              <h3 class="tracking-tight text-sm font-medium">Freeze</h3>
+            </div>
+            <div class="p-6 pt-0">
+              <div class="text-2xl font-bold">Enabled</div>
+              <p class="text-xs text-gray-500">
+                {{ nft.freeze|truncatechars:9 }}
+              </p>
+            </div>
+          </div>
+          {% endif %} {% if nft.manager %}
+          <div
+            class="rounded-xl border border-gray-200 dark:border-gray-800 bg-card text-card-foreground shadow"
+          >
+            <div
+              class="p-6 flex flex-row items-center justify-between space-y-0 pb-2"
+            >
+              <h3 class="tracking-tight text-sm font-medium">Clawback</h3>
+            </div>
+            <div class="p-6 pt-0">
+              <div class="text-2xl font-bold">Enabled</div>
+              <p class="text-xs text-gray-500">
+                {{ nft.clawback|truncatechars:9 }}
+              </p>
+            </div>
+          </div>
           {% endif %}
         </div>
       </div>
+
+      {% comment %}
+      <div>
+        <h2 class="text-lg font-bold mb-2">Traits</h2>
+        <div class="grid gap-4 grid-cols-1 md:grid-cols-2">
+          <pre class="md:col-span-2">
+            <code class="language-json">{{ nft.properties.traits }}</code>
+          </pre>
+        </div>
+      </div>
+      {% endcomment %} {% if user.is_authenticated and user.pk == nft.creator.pk
+      %}
+      <div>
+        <h2 class="text-lg font-bold mb-2">Actions</h2>
+        <div class="grid gap-4 grid-cols-1 md:grid-cols-2">
+          <div>
+            <a
+              href="#"
+              class="w-full mt-2 cursor-pointer focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 flex-shrink-0 font-medium rounded-md text-sm gap-x-1.5 px-2.5 py-1.5 shadow-sm text-white dark:text-gray-900 bg-amber-500 hover:bg-amber-600 disabled:bg-amber-500 dark:bg-amber-400 dark:hover:bg-amber-500 dark:disabled:bg-amber-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-500 dark:focus-visible:outline-amber-400 inline-flex items-center justify-center"
+            >
+              Generate Claim Link
+            </a>
+          </div>
+          <div>
+            <a
+              href="#"
+              class="w-full mt-2 cursor-pointer focus:outline-none disabled:cursor-not-allowed disabled:opacity-75 flex-shrink-0 font-medium rounded-md text-sm gap-x-1.5 px-2.5 py-1.5 shadow-sm text-white dark:text-gray-900 bg-amber-500 hover:bg-amber-600 disabled:bg-amber-500 dark:bg-amber-400 dark:hover:bg-amber-500 dark:disabled:bg-amber-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-amber-500 dark:focus-visible:outline-amber-400 inline-flex items-center justify-center"
+            >
+              Update metadata
+            </a>
+          </div>
+        </div>
+      </div>
+      {% endif %}
     </section>
   </div>
 </main>
