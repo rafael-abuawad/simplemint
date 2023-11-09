@@ -37,7 +37,6 @@ class NFT(models.Model):
     description = models.TextField()
     image = models.ImageField(upload_to="nfts/images")
     image_integrity = models.CharField(blank=True, max_length=64, editable=False)
-    is_public = models.BooleanField(blank=False, default=False)
     properties = models.OneToOneField(Properties, on_delete=models.CASCADE)
     index = models.IntegerField(blank=True, default=0)
     owner = models.ForeignKey(User, on_delete=models.CASCADE)

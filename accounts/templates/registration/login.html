@@ -1,4 +1,7 @@
-{% extends "base.html" %} {% load tags %} {% block content %}
+{% extends "auth.html" %}
+{% load tags %}
+
+{% block content %}
 <div class="mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
   <main
     class="container relative h-screen flex-col items-center justify-center grid lg:max-w-none lg:px-0 mx-auto"
@@ -9,7 +12,9 @@
       <a href="{% url 'register' %}">Register</a>
     </div>
     <div class="absolute left-4 top-4 md:left-8 md:top-8 font-bold">
-      🍃 Simplemint
+      <a href="{% url 'nft-list' %}">
+        🍃 Simplemint
+      </a>
     </div>
     <div class="lg:p-8">
       <div
@@ -43,9 +48,9 @@
                   <div class="mt-1 relative">
                     <div class="relative">{{ field|add_class:"input" }}</div>
                     {% for error in field.errors %}
-                    <small class="mt-2 text-red-500 dark:text-red-400 text-sm"
-                      >{{ error|escape }}</small
-                    >
+                      <small class="mt-2 text-red-500 dark:text-red-400 text-sm">
+                        {{ error|escape }}
+                      </small>
                     {% endfor %}
                   </div>
                 </div>

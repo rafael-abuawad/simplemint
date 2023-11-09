@@ -1,4 +1,7 @@
-{% extends "base.html" %} {% load tags %} {% block content %}
+{% extends "auth.html" %}
+{% load tags %}
+
+{% block content %}
 <div class="mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
   <main
     class="container relative h-screen flex-col items-center justify-center grid lg:max-w-none lg:px-0 mx-auto"
@@ -46,9 +49,9 @@
                       }} {% else %} {{ field|add_class:"input" }} {% endif %}
                     </div>
                     {% for error in field.errors %}
-                    <small class="mt-2 text-red-500 dark:text-red-400 text-sm"
-                      >{{ error|escape }}</small
-                    >
+                      <small class="mt-2 text-red-500 dark:text-red-400 text-sm">
+                        {{ error|escape }}
+                      </small>
                     {% endfor %}
                   </div>
                 </div>

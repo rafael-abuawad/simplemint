@@ -10,7 +10,6 @@ class NFTForm(forms.Form):
     decimals = forms.IntegerField()
     description = forms.CharField(widget=forms.Textarea)
     image = forms.ImageField()
-    is_public = forms.BooleanField(required=False)
     creator = forms.CharField(required=False)
     mananger = forms.CharField(
         max_length=64,

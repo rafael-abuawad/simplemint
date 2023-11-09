@@ -12,6 +12,13 @@ class NFTListView(ListView):
     model = NFT
 
 
+class UserNFTListView(LoginRequiredMixin, ListView):
+    model = NFT
+
+    def get_queryset(self):
+        return NFT.objects.filter(owner=self.request.user)
+
+
 class NFTDetailView(DetailView):
     model = NFT
 
@@ -56,7 +63,6 @@ class NFTFormView(LoginRequiredMixin, FormView):
                 clawback=form.cleaned_data("clawback"),
                 description=form.cleaned_data.get("description"),
                 image=form.cleaned_data.get("image"),
-                is_public=form.cleaned_data.get("is_public"),
                 index=asset_create(self.request.user.account),
                 properties=properties,
                 owner=self.request.user,
