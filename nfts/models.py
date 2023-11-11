@@ -41,11 +41,11 @@ class NFT(models.Model):
     def generate_claim_token(self):
         self.is_claimable = True
         self.claim_token = uuid.uuid4()
-    
+
     def claim_token(self):
         self.is_claimable = True
-        self.claim_token = "" 
-    
+        self.claim_token = ""
+
     @classmethod
     def calculate_hash(cls, image):
         sha256 = hashlib.sha256()

@@ -14,25 +14,25 @@ class NFTForm(forms.Form):
     )
     mananger = forms.CharField(
         max_length=64,
-        min_length=64,
+        min_length=58,
         required=False,
         help_text="You can set the `mananger` field empty if you dont want the `mananger` functionality enabled.",
     )
     reserve = forms.CharField(
         max_length=64,
-        min_length=64,
+        min_length=58,
         required=False,
         help_text="You can set the `mananger` field empty if you dont want the `mananger` functionality enabled.",
     )
     freeze = forms.CharField(
         max_length=64,
-        min_length=64,
+        min_length=58,
         required=False,
         help_text="You can set the `freeze` field empty if you dont want the `freeze` functionality enabled.",
     )
     clawback = forms.CharField(
         max_length=64,
-        min_length=64,
+        min_length=58,
         required=False,
         help_text="You can set the `clawback` field empty if you dont want the `clawback` functionality enabled.",
     )

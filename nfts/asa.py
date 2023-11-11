@@ -15,7 +15,7 @@ algod_client = get_algod_client()
 def asset_create(nft: NFT, url: str) -> int:
     sp = algod_client.suggested_params()
     txn = transaction.AssetConfigTxn(
-        sender=nft.owner.account.address,
+        sender=nft.creator.account.address,
         sp=sp,
         default_frozen=False,
         unit_name=nft.unit,
@@ -31,7 +31,7 @@ def asset_create(nft: NFT, url: str) -> int:
     )
 
     # Sign with secret key of creator
-    stxn = txn.sign(nft.owner.account.private_key)
+    stxn = txn.sign(nft.creator.account.private_key)
 
     # Send the transaction to the network and retrieve the txid.
     txid = algod_client.send_transaction(stxn)

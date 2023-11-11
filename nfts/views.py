@@ -1,14 +1,11 @@
 from typing import Any, Dict
-from django.http import HttpRequest
 from django.urls import reverse_lazy
-from django.views.generic import ListView, DetailView, FormView, RedirectView
+from django.views.generic import ListView, DetailView, FormView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, redirect, get_object_or_404
 
 from nfts.forms import NFTForm
 from nfts.models import NFT, Properties
-from nfts.asa import asset_create, asset_optin, asset_transfer, asset_info
+from nfts.asa import asset_create
 
 
 class NFTListView(ListView):
@@ -25,6 +22,7 @@ class UserNFTListView(LoginRequiredMixin, ListView):
 class NFTDetailView(DetailView):
     model = NFT
 
+
 class NFTFormView(LoginRequiredMixin, FormView):
     form_class = NFTForm
     template_name = "nfts/nft_form.html"
@@ -40,7 +38,7 @@ class NFTFormView(LoginRequiredMixin, FormView):
 
     def form_valid(self, form):
         if form.is_valid():
-            creator = form.cleaned_data.get("creator")
+            creator = self.request.user.account.address
             traits = (form.cleaned_data.get("traits"),)
             properties = Properties.objects.create(creator=creator, traits=traits)
             properties.save()
@@ -55,7 +53,7 @@ class NFTFormView(LoginRequiredMixin, FormView):
                 description=form.cleaned_data.get("description"),
                 image=form.cleaned_data.get("image"),
                 properties=properties,
-                owner=self.request.user,
+                creator=self.request.user,
             )
 
             url = f"/_/api/v1/nfts/{nft.pk}"

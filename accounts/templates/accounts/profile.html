@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load tags %}
+
+{% block content %}
+<main>
+  <div class="mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
+    <!-- header -->
+    <hgroup>
+      <h3 class="text-lg font-medium">Profile</h3>
+      <p class="text-sm text-muted-foreground">
+        Here is all the information our server has about you.
+      </p>
+    </hgroup>
+
+    <!-- divider -->
+    <div class="py-2">
+      <div class="flex items-center align-center text-center w-full flex-row">
+        <div
+          class="flex border-gray-200 dark:border-gray-800 w-full border-t border-solid"
+        >
+        </div>
+      </div>
+    </div>
+
+    <div class="grid gap-2 cols-1 mt-2">
+        <p class="bg-gray-100 dark:bg-gray-800 rounded-lg px-3 py-2 w-full">
+            Email<br>
+            <span class="font-bold">{{ user.email }}</span>
+        </p>
+        <p class="bg-gray-100 dark:bg-gray-800 rounded-lg px-3 py-2 w-full">
+            Address<br>
+            <span class="font-bold">{{ user.account.address }}</span>
+        </p>
+    </div>
+  </div>
+</main>
+{% endblock content %}
