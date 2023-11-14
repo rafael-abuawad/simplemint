@@ -1,4 +1,5 @@
 from decouple import config
+import os
 
 from .base import *
 
@@ -9,10 +10,7 @@ SECRET_KEY = config("SECRET")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = [
-    "localhost",
-    "127.0.0.1"
-]
+ALLOWED_HOSTS = ["*"]
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
@@ -27,3 +25,6 @@ DATABASES = {
         "PORT": config("DB_PORT", default="5432")
     }
 }
+
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
