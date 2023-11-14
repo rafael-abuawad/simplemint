@@ -34,23 +34,22 @@
               their NFTs
             </h4>
           </hgroup>
-          {% if user.is_authenticated %}
-          <div class="flex items-center space-x-2">
-            <div class="relative inline-flex text-left rtl:text-right">
-              <a
-                href="{% url 'info' %}"
-                class="focus:outline-none focus-visible:outline-0 disabled:cursor-not-allowed disabled:opacity-75 flex-shrink-0 font-medium rounded-md text-sm gap-x-1.5 p-1.5 text-gray-700 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-800 focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-amber-500 dark:focus-visible:ring-amber-400 inline-flex items-center"
-              >
-                ℹ
+          
+          <div class="flex items-center space-x-4">
+            <div class="mr-4">
+              <a href="{% url 'about' %}" class="focus:outline-none focus-visible:outline-0 disabled:cursor-not-allowed disabled:opacity-75 flex-shrink-0 font-medium rounded-md text-sm gap-x-1.5 p-1.5 text-gray-700 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-800 focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-amber-500 dark:focus-visible:ring-amber-400 inline-flex items-center">
+                About
               </a>
-              <a
-                href="{% url 'profile' %}"
-                class="inline-flex w-full"
-                role="button"
-              >
-                <span
-                  class="relative inline-flex items-center justify-center flex-shrink-0 rounded-full h-8 w-8 text-sm"
-                >
+            </div>
+          {% if user.is_authenticated %}
+            <div class="mr-4">
+              <a href="{% url 'info' %}" class="focus:outline-none focus-visible:outline-0 disabled:cursor-not-allowed disabled:opacity-75 flex-shrink-0 font-medium rounded-md text-sm gap-x-1.5 p-1.5 text-gray-700 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-800 focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-amber-500 dark:focus-visible:ring-amber-400 inline-flex items-center">
+                Information
+              </a>
+            </div>
+            <div class="relative inline-flex text-left rtl:text-right">
+              <a href="{% url 'profile' %}" class="inline-flex w-full" role="button">
+                <span class="relative inline-flex items-center justify-center flex-shrink-0 rounded-full h-8 w-8 text-sm">
                   <img
                     class="rounded-full h-8 w-8 text-sm"
                     src="https://ui-avatars.com/api/?name={{ user.email }}"
@@ -58,25 +57,19 @@
                 </span>
               </a>
             </div>
-            <a
-              role="button"
-              href="{% url 'logout' %}"
-              class="focus:outline-none focus-visible:outline-0 disabled:cursor-not-allowed disabled:opacity-75 flex-shrink-0 font-medium rounded-md text-sm gap-x-1.5 p-1.5 text-gray-700 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-800 focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-amber-500 dark:focus-visible:ring-amber-400 inline-flex items-center"
-            >
-              <i class="bi bi-box-arrow-right"></i>
-            </a>
-          </div>
+            <div class="mr-4">
+              <a role="button" href="{% url 'logout' %}" class="focus:outline-none focus-visible:outline-0 disabled:cursor-not-allowed disabled:opacity-75 flex-shrink-0 font-medium rounded-md text-sm gap-x-1.5 p-1.5 text-gray-700 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-800 focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-amber-500 dark:focus-visible:ring-amber-400 inline-flex items-center">
+                <i class="bi bi-box-arrow-right"></i>
+              </a>
+            </div>
           {% else %}
-          <div class="flex items-center space-x-2">
-            <a
-              role="button"
-              href="{% url 'login' %}"
-              class="focus:outline-none focus-visible:outline-0 disabled:cursor-not-allowed disabled:opacity-75 flex-shrink-0 font-medium rounded-md text-sm gap-x-1.5 p-1.5 text-gray-700 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-800 focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-amber-500 dark:focus-visible:ring-amber-400 inline-flex items-center"
-            >
-              Login
-            </a>
-          </div>
+            <div class="mr-4">
+              <a role="button" href="{% url 'login' %}" class="focus:outline-none focus-visible:outline-0 disabled:cursor-not-allowed disabled:opacity-75 flex-shrink-0 font-medium rounded-md text-sm gap-x-1.5 p-1.5 text-gray-700 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white hover:bg-gray-50 dark:hover:bg-gray-800 focus-visible:ring-inset focus-visible:ring-2 focus-visible:ring-amber-500 dark:focus-visible:ring-amber-400 inline-flex items-center">
+                Login
+              </a>
+            </div>
           {% endif %}
+          </div>
         </div>
 
         <!-- divider -->

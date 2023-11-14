@@ -1,6 +1,7 @@
 from typing import Any, Dict
+from django.conf import settings
 from django.urls import reverse_lazy
-from django.views.generic import ListView, DetailView, FormView
+from django.views.generic import TemplateView, ListView, DetailView, FormView
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 from nfts.forms import NFTForm
@@ -56,7 +57,8 @@ class NFTFormView(LoginRequiredMixin, FormView):
                 creator=self.request.user,
             )
 
-            url = f"/_/api/v1/nfts/{nft.pk}"
+            base_url = settings.BASE_URL
+            url = f"{base_url}/_/api/v1/nfts/{nft.pk}"
             i = asset_create(nft, url)
 
             img = form.cleaned_data.get("image")
@@ -65,3 +67,7 @@ class NFTFormView(LoginRequiredMixin, FormView):
             nft.save()
 
         return super(NFTFormView, self).form_valid(form)
+
+
+class AboutView(TemplateView):
+    template_name = "shared/about.html"

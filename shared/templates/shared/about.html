@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% load tags %}
+
+{% block content %}
+<main class="mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
+    <h1 class="text-4xl font-bold mb-4">Simplemint: Algorand as Infrastructure</h1>
+
+    <div class="mb-8">
+        <h2 class="text-2xl font-bold mb-2">Overview</h2>
+        <p>Simplemint is a hackathon project designed to showcase the potential of Algorand as a foundational infrastructure for web3 applications. The project focuses on simplifying the user experience by integrating familiar web2 authentication methods while leveraging the power of the Algorand blockchain for creating and managing NFTs.</p>
+    </div>
+
+    <div class="mb-8">
+        <h2 class="text-2xl font-bold mb-2">Key Concepts</h2>
+        <div class="mb-4">
+            <h3 class="text-xl font-bold mb-2">1. User-Friendly Authentication</h3>
+            <p>Traditional blockchain applications often require users to manage complex private keys, which can be a barrier for mainstream adoption. Simplemint addresses this challenge by implementing a user-friendly authentication process. Users can create NFTs on the Algorand Blockchain using their email and password, making the experience more intuitive and accessible.</p>
+        </div>
+        <div class="mb-4">
+            <h3 class="text-xl font-bold mb-2">2. Web2.5 Environment</h3>
+            <p>Simplemint operates in a web2.5 environment, bridging the gap between the familiarity of web2 and the capabilities of web3. By retaining the standard email and password authentication, users can seamlessly transition into the world of blockchain without the need to understand or manage private keys directly.</p>
+        </div>
+        <div class="mb-4">
+            <h3 class="text-xl font-bold mb-2">3. Algorand as Infrastructure</h3>
+            <p>The core concept of Simplemint is to position Algorand as a robust infrastructure for various industries and companies looking to embrace web3 technologies. This proof of concept demonstrates that users can effortlessly create an account and hold NFTs, eliminating the complexity of setting up a wallet. This approach is particularly valuable for businesses unsure about transitioning to web3 and enables them to explore blockchain benefits without overwhelming their customer base.</p>
+        </div>
+    </div>
+
+    <div class="mb-8">
+        <h2 class="text-2xl font-bold mb-2">Getting Started</h2>
+        <ol class="list-decimal pl-6">
+            <li>Clone the repository: <code class="bg-gray-200 p-1">git clone https://github.com/rafael-abuawad/simplemint.git</code></li>
+            <li>Navigate to the project directory: <code class="bg-gray-200 p-1">cd simplemint</code></li>
+            <li>Install dependencies: <code class="bg-gray-200 p-1">pip install -r requirements.txt</code></li>
+            <li>Apply all of the migrations: <code class="bg-gray-200 p-1">python3 manage.py migrate</code></li>
+            <li>Run the application: <code class="bg-gray-200 p-1">python3 manage.py runserve</code></li>
+        </ol>
+    </div>
+
+    <div class="mb-8">
+        <h2 class="text-2xl font-bold mb-2">Future Extensions</h2>
+        <ul class="list-disc pl-6">
+            <li><strong>Multi-Asset Support:</strong> Extend the platform to support a variety of assets beyond NFTs.</li>
+            <li><strong>Industry Integration:</strong> Explore applications in different industries, such as gaming, art, or real estate.</li>
+            <li><strong>Enhanced Security:</strong> Implement additional security measures to ensure the safety of user data and assets.</li>
+        </ul>
+    </div>
+
+    <div class="mb-8">
+        <h2 class="text-2xl font-bold mb-2">Contributors</h2>
+        <ul class="list-disc pl-6">
+            <li>Rafael Abuawad (<a href="https://twitter.com/_rabuawad" class="text-blue-500">@_rabuawad</a>)</li>
+        </ul>
+    </div>
+
+    <div>
+        <h2 class="text-2xl font-bold mb-2">License</h2>
+        <p>This project is licensed under the <a href="LICENSE" class="text-blue-500">MIT License</a>.</p>
+    </div>
+</main>
+{% endblock content %}

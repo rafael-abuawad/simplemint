@@ -123,3 +123,5 @@ EMAIL_PORT = config("EMAIL_PORT", int)
 EMAIL_USE_SSL = config("EMAIL_USE_SSL", bool)
 EMAIL_HOST_USER = config("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = config("EMAIL_HOST_PASSWORD")
+
+BASE_URL = 'https://www.myproject.com'
