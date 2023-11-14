@@ -5,7 +5,7 @@ from nfts.views import (
     NFTListView,
     UserNFTListView,
     NFTDetailView,
-    AboutView
+    AboutView,
 )
 
 urlpatterns = [
