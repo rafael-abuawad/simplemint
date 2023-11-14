@@ -17,15 +17,11 @@ ALLOWED_HOSTS = ["*"]
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": "django",
-        "USER": "django",
-        "PASSWORD": config("DB_PASSWORD"),
-        "HOST": "localhost",
-        "PORT": "5432",
-        "OPTIONS": {"sslmode": "require"},
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "db.sqlite3",
     }
 }
+
 
 STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
